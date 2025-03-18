@@ -2,7 +2,7 @@ name: Sync Quarkus Upstream Repository
 
 on:
   schedule:
-    - cron: '45 * * * *'  # Runs hourly at minute 45
+    - cron: '0 3 * * *'  # Runs hourly at minute 45
   workflow_dispatch:  # Allows manual triggering
 
 env:

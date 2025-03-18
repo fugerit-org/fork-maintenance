@@ -2,7 +2,8 @@ name: Sync Apache Freemarker Upstream Repository
 
 on:
   schedule:
-    - cron: '16 * * * *'  
+    - cron: '0 3 * * *'  # Runs hourly at minute 45
+  workflow_dispatch:  # Allows manual triggering
 
 env:
   UPSTREAM_REPO: "apache/freemarker"  # Source repo (upstream)
