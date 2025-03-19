@@ -9,5 +9,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- sync worklow for snakeyaml
 - sync worklow for apache freemarker
 - sync worklow for quarkus
