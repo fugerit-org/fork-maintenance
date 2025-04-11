@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- sync worklow for snakeyaml
-- sync worklow for apache freemarker
-- sync worklow for quarkus
+- sync workflow for eid-wallet-it-docs
+- sync workflow for snakeyaml
+- sync workflow for apache freemarker
+- sync workflow for quarkus

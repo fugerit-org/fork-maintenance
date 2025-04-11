@@ -1,0 +1,42 @@
+name: Sync Italia IT-Wallet Technical Specifications
+
+on:
+  schedule:
+    - cron: '10 3 * * *'  # Runs hourly at minute 45
+  workflow_dispatch:  # Allows manual triggering
+
+env:
+  UPSTREAM_REPO: "italia/eid-wallet-it-docs"  # Source repo (upstream)
+  FORK_REPO: "fugerit-org/eid-wallet-it-docs"  # Destination repo (your fork)
+  BRANCH: "versione-corrente"  # Branch to sync
+  GIT_USER_NAME: "Matteo Franci a.k.a. Fugerit"  # Git username (configurable)
+  GIT_USER_EMAIL: "m@fugerit.org"  # Git email (configurable)
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ env.FORK_REPO }}
+          token: ${{ secrets.PAT_GITHUB }}  # Use a Personal Access Token (PAT)
+
+      - name: Set up Git
+        run: |
+          git config --global user.name "${{ env.GIT_USER_NAME }}"
+          git config --global user.email "${{ env.GIT_USER_EMAIL }}"
+
+      - name: Add upstream and fetch latest changes
+        run: |
+          git remote add upstream https://github.com/${{ env.UPSTREAM_REPO }}.git || true
+          git fetch upstream
+
+      - name: Merge upstream changes
+        run: |
+          git merge upstream/${{ env.BRANCH }}
+
+      - name: Push changes to fork using PAT
+        run: |
+          git push https://${{ secrets.PAT_GITHUB }}@github.com/${{ env.FORK_REPO }}.git ${{ env.BRANCH }}
+        
